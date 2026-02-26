@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'en-US' }}">
+<head>
+
+  <!-- ================================================
+       Google Tag Manager
+  ================================================ -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','{{ site.gtm_id }}');</script>
+
+  <!-- ================================================
+       Meta essentiels
+  ================================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="{{ site.author }}">
+  <meta name="theme-color" content="#0b0f14">
+
+  <!-- ================================================
+       SEO — Title & Description
+  ================================================ -->
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <meta name="description" content="{{ page.description }}">
+
+  <!-- ================================================
+       Canonical & hreflang
+  ================================================ -->
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <link rel="alternate" hreflang="en" href="{{ site.url }}{{ page.url }}">
+  <link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ page.url }}">
+
+  <!-- ================================================
+       Open Graph — Article
+  ================================================ -->
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:description" content="{{ page.description }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ site.url }}{{ page.image | default: '/images/og/wallid-guergour.webp' }}">
+  <meta property="og:image:alt" content="{{ page.image_alt | default: page.title }}">
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+  <meta property="article:modified_time" content="{{ page.last_modified_at | default: page.date | date_to_xmlschema }}">
+  <meta property="article:author" content="{{ site.url }}/about/">
+  <meta property="article:section" content="{{ page.category }}">
+  {% if page.tags %}
+  {% for tag in page.tags %}
+  <meta property="article:tag" content="{{ tag }}">
+  {% endfor %}
+  {% endif %}
+
+  <!-- ================================================
+       Twitter Card
+  ================================================ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.title }}">
+  <meta name="twitter:description" content="{{ page.description }}">
+  <meta name="twitter:image" content="{{ site.url }}{{ page.image | default: '/images/og/wallid-guergour.webp' }}">
+
+  <!-- ================================================
+       JSON-LD — Article
+  ================================================ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ site.url }}{{ page.url }}"
+    },
+    "headline": "{{ page.title }}",
+    "description": "{{ page.description }}",
+    "image": ["{{ site.url }}{{ page.image | default: '/images/og/wallid-guergour.webp' }}"],
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ site.author }}",
+      "url": "{{ site.url }}/about/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "{{ site.author }}",
+      "url": "{{ site.url }}",
+      "image": {
+        "@type": "ImageObject",
+        "url": "{{ site.url }}/images/og/wallid-guergour.webp"
+      }
+    }
+  }
+  </script>
+
+  <!-- ================================================
+       JSON-LD — BreadcrumbList
+  ================================================ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ site.url }}/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "{{ site.url }}/blog/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{ page.category | capitalize }}",
+        "item": "{{ site.url }}/blog/{{ page.category }}/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "{{ page.title }}",
+        "item": "{{ site.url }}{{ page.url }}"
+      }
+    ]
+  }
+  </script>
+
+  <!-- ================================================
+       JSON-LD — FAQPage (si FAQ définie dans le front matter)
+  ================================================ -->
+  {% if page.faq %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {% for item in page.faq %}
+      {
+        "@type": "Question",
+        "name": "{{ item.q }}",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ item.a }}"
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+  </script>
+  {% endif %}
+
+  <!-- ================================================
+       JSON-LD — HowTo (si howto défini dans le front matter)
+  ================================================ -->
+  {% if page.howto %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "{{ page.howto.name }}",
+    "description": "{{ page.howto.description }}",
+    "step": [
+      {% for step in page.howto.steps %}
+      {
+        "@type": "HowToStep",
+        "position": {{ forloop.index }},
+        "name": "{{ step.name }}",
+        "text": "{{ step.text }}"
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+  </script>
+  {% endif %}
+
+  <!-- ================================================
+       Google Analytics
+  ================================================ -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.ga_id }}');
+  </script>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{{ site.url }}/images/favicons/favicon.ico">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/basic.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/layout.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/magnific-popup.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/animate.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/jarallax.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/swiper.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/fontawesome.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/brands.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/solid.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/custom.css">
+
+</head>
+
+<body class="page">
+
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.gtm_id }}"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="centrize full-width">
+      <div class="vertical-center">
+        <div class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="cursor-follower"></div>
+
+    <!-- ================================================
+         Header
+    ================================================ -->
+    <header class="header">
+      <div class="head-top">
+        <a href="#" class="menu-btn"><span></span></a>
+
+        {% raw %}
+        <div id="app">
+          <img src="/images/Items/search.svg" width="100" alt="Search the blog" class="">
+          <main>
+            <input type="text" v-model="query" placeholder="Search...">
+            <div id="results">
+              <div v-for="item in filteredResults" :key="item.url" class="result-item">
+                <h2><a :href="item.url">{{ item.title }}</a></h2>
+                <p>{{ item.description }}</p>
+              </div>
+            </div>
+            <p v-if="!filteredResults.length && query">No results for "{{ query }}"</p>
+          </main>
+        </div>
+        {% endraw %}
+
+        <div class="top-menu hover-masks">
+          <div class="top-menu-nav">
+            <div class="menu-topmenu-container">
+              <ul class="menu">
+                <li class="menu-item">
+                  <a href="{{ site.baseurl }}/">Home</a>
+                </li>
+                <li class="menu-item current-menu-item">
+                  <a href="{{ site.baseurl }}/blog/">Blog</a>
+                </li>
+                <li class="menu-item">
+                  <a href="{{ site.baseurl }}/about/">About</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <div class="wrapper">
+
+      <!-- ================================================
+           Hero article — titre + meta
+      ================================================ -->
+      <div class="section started section-title" id="section-started">
+        <div class="video-bg jarallax" style="background-image: url({{ site.baseurl }}/images/bg/hero.webp);">
+          <div class="video-bg-mask"></div>
+          <div class="video-bg-texture" id="grained_container"></div>
+        </div>
+        <div class="centrize full-width">
+          <div class="vertical-center">
+            <div class="started-content">
+
+              <!-- Label catégorie -->
+              <div class="article-label">{{ page.category | upcase }}</div>
+
+              <!-- Titre -->
+              <h1 class="h-title">{{ page.title }}</h1>
+
+              <!-- Meta : date + temps de lecture -->
+              <div class="article-meta">
+                <span class="article-date">{{ page.date | date: "%B %d, %Y" }}</span>
+                {% if page.read_time %}
+                <span class="article-sep">·</span>
+                <span class="article-read-time">{{ page.read_time }} min read</span>
+                {% endif %}
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           Contenu de l'article
+      ================================================ -->
+      <div class="section about" id="section-article">
+        <div class="content content-box">
+          <div class="desc single-post-text">
+
+            <!-- Image principale (optionnelle) -->
+            {% if page.image %}
+            <figure class="article-hero-image">
+              <img src="{{ site.baseurl }}{{ page.image }}"
+                   alt="{{ page.image_alt | default: page.title }}"
+                   loading="lazy">
+              {% if page.image_caption %}
+              <figcaption>{{ page.image_caption }}</figcaption>
+              {% endif %}
+            </figure>
+            {% endif %}
+
+            <!-- Corps de l'article (Markdown converti en HTML) -->
+            {{ content }}
+
+            <!-- ================================================
+                 Section FAQ (si définie dans le front matter)
+            ================================================ -->
+            {% if page.faq %}
+            <div class="article-faq">
+              <h2>Frequently Asked Questions</h2>
+              {% for item in page.faq %}
+              <div class="faq-item">
+                <h3>{{ item.q }}</h3>
+                <p>{{ item.a }}</p>
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           Navigation entre articles (prev / next)
+      ================================================ -->
+      <div class="section about" id="section-nav-articles">
+        <div class="content content-box">
+          <div class="article-navigation">
+            {% if page.previous.url %}
+            <a href="{{ page.previous.url }}" class="btn hover-animated nav-prev">
+              <span class="circle"></span>
+              <span class="lnk">← {{ page.previous.title | truncate: 40 }}</span>
+            </a>
+            {% endif %}
+            {% if page.next.url %}
+            <a href="{{ page.next.url }}" class="btn hover-animated nav-next">
+              <span class="circle"></span>
+              <span class="lnk">{{ page.next.title | truncate: 40 }} →</span>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           CTA — Back to blog
+      ================================================ -->
+      <div class="section about" id="section-cta">
+        <div class="content content-box">
+          <div class="desc">
+            <a href="{{ site.baseurl }}/blog/" class="btn hover-animated">
+              <span class="circle"></span>
+              <span class="lnk">← Back to blog</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer banner -->
+      <section id="Banner-du-bas" class="dark">
+        <div class="container-fluid">
+          <div class="row">
+            <center>
+              <p>© {{ 'now' | date: "%Y" }} — Wallid Guergour. Canada.</p>
+            </center>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- end .wrapper -->
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="soc-box">
+        <div class="follow-label">Follow Me</div>
+        <div class="soc">
+          <li>
+            <a href="{{ site.instagram }}" title="Instagram" target="_blank" rel="noopener noreferrer">
+              <img src="{{ site.url }}/images/icons/instagram.svg" alt="Instagram" width="30" height="30">
+            </a>
+          </li>
+          <li>
+            <a href="{{ site.linkedin }}" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <img src="{{ site.url }}/images/icons/linkedin.svg" alt="LinkedIn" width="30" height="30">
+            </a>
+          </li>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </footer>
+
+    <div class="lines">
+      <div class="line-col"></div>
+      <div class="line-col"></div>
+      <div class="line-col"></div>
+      <div class="line-col"></div>
+      <div class="line-col"></div>
+    </div>
+
+  </div><!-- end .container -->
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
+  <script src="{{ site.baseurl }}/js/app.js"></script>
+  <script src="{{ site.baseurl }}/js/jquery.min.js"></script>
+  <script src="{{ site.baseurl }}/js/jquery.validate.js"></script>
+  <script src="{{ site.baseurl }}/js/magnific-popup.js"></script>
+  <script src="{{ site.baseurl }}/js/simpleParallax.js"></script>
+  <script src="{{ site.baseurl }}/js/typed.js"></script>
+  <script src="{{ site.baseurl }}/js/jarallax.js"></script>
+  <script src="{{ site.baseurl }}/js/jarallax-video.js"></script>
+  <script src="{{ site.baseurl }}/js/jarallax-element.js"></script>
+  <script src="{{ site.baseurl }}/js/imagesloaded.pkgd.js"></script>
+  <script src="{{ site.baseurl }}/js/isotope.pkgd.js"></script>
+  <script src="{{ site.baseurl }}/js/swiper.js"></script>
+  <script src="{{ site.baseurl }}/js/grained.js"></script>
+  <script src="{{ site.baseurl }}/js/scripts.js"></script>
+
+  <!-- Header scroll -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const hero   = document.querySelector("#section-started");
+    const header = document.querySelector(".header");
+    if (!hero || !header) return;
+    header.classList.add("hero-only");
+    const obs = new IntersectionObserver(
+      (entries) => {
+        header.classList.toggle("is-hidden", !entries[0].isIntersecting);
+      },
+      { root: null, threshold: 0.15 }
+    );
+    obs.observe(hero);
+  });
+  </script>
+
+  <!-- Back to top -->
+  <button id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 15L12 9L6 15" stroke="white" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <script>
+  const backToTopButton = document.getElementById("backToTop");
+  window.addEventListener("scroll", () => {
+    backToTopButton.classList.toggle("show", window.scrollY > 250);
+  });
+  backToTopButton.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  </script>
+
+</body>
+</html>

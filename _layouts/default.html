@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'en-US' }}">
+<head>
+
+  <!-- ================================================
+       Google Tag Manager
+  ================================================ -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','{{ site.gtm_id }}');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- ================================================
+       Meta essentiels
+  ================================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="{{ site.author }}">
+  <meta name="theme-color" content="#0b0f14">
+
+  <!-- ================================================
+       SEO — Title & Description
+  ================================================ -->
+  {% if page.title %}
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+  {% else %}
+    <title>{{ site.title }} — {{ site.tagline }}</title>
+    <meta name="description" content="{{ site.description }}">
+  {% endif %}
+
+  <!-- ================================================
+       Canonical & hreflang
+  ================================================ -->
+  <link rel="canonical" href="{{ site.url }}{{ page.url | remove: 'index.html' }}">
+  <link rel="alternate" hreflang="{{ page.lang | default: site.lang }}" href="{{ site.url }}{{ page.url }}">
+  <link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ page.url }}">
+
+  <!-- ================================================
+       Open Graph
+  ================================================ -->
+  <meta property="og:type" content="{{ page.og_type | default: 'website' }}">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:title" content="{{ page.title | default: site.title }}">
+  <meta property="og:description" content="{{ page.description | default: site.description }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ site.url }}{{ page.image | default: '/images/og/wallid-guergour.webp' }}">
+  <meta property="og:image:alt" content="{{ page.image_alt | default: 'Wallid Guergour — Industrial Welder & Fabricator' }}">
+
+  <!-- ================================================
+       Twitter Card
+  ================================================ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.title | default: site.title }}">
+  <meta name="twitter:description" content="{{ page.description | default: site.description }}">
+  <meta name="twitter:image" content="{{ site.url }}{{ page.image | default: '/images/og/wallid-guergour.webp' }}">
+
+  <!-- ================================================
+       JSON-LD — Schema.org
+       Le type change selon la page (Person sur index, Article sur les posts)
+  ================================================ -->
+  {% if page.schema_type == "Article" %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ site.url }}{{ page.url }}"
+    },
+    "headline": "{{ page.title }}",
+    "description": "{{ page.description }}",
+    "image": ["{{ site.url }}{{ page.image | default: '/images/og/wallid-guergour.webp' }}"],
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ site.author }}",
+      "url": "{{ site.url }}"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "{{ site.author }}",
+      "url": "{{ site.url }}",
+      "image": {
+        "@type": "ImageObject",
+        "url": "{{ site.url }}/images/og/wallid-guergour.webp"
+      }
+    }
+    {% if page.faq %},
+    "hasPart": [
+      {% for item in page.faq %}
+      {
+        "@type": "Question",
+        "name": "{{ item.q }}",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ item.a }}"
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+    {% endif %}
+  }
+  </script>
+  {% elsif page.schema_type == "BreadcrumbList" or page.url != "/" %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ site.url }}/"
+      }
+      {% if page.breadcrumb_name %},
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ page.breadcrumb_name }}",
+        "item": "{{ site.url }}{{ page.url }}"
+      }
+      {% endif %}
+    ]
+  }
+  </script>
+  {% else %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Wallid Guergour",
+    "url": "{{ site.url }}",
+    "image": "{{ site.url }}/images/og/wallid-guergour.webp",
+    "jobTitle": "Industrial Welder & Fabricator",
+    "description": "CWB (x5) and AWS (x2) certified industrial welder based in Canada. Specialized in aerospace, nuclear, hydroelectric, forestry, and mining sectors.",
+    "knowsAbout": [
+      "SMAW Welding",
+      "GTAW Welding",
+      "GMAW Welding",
+      "FCAW Welding",
+      "Mining Equipment Fabrication",
+      "Boilermaking",
+      "Industrial Fabrication",
+      "CWB Certification",
+      "AWS Certification"
+    ],
+    "hasCredential": [
+      { "@type": "EducationalOccupationalCredential", "name": "CWB Certification x5" },
+      { "@type": "EducationalOccupationalCredential", "name": "AWS Certification x2" },
+      { "@type": "EducationalOccupationalCredential", "name": "Titre Professionnel Soudeur Industriel (France)" }
+    ],
+    "sameAs": [
+      "{{ site.linkedin }}",
+      "{{ site.instagram }}"
+    ]
+  }
+  </script>
+  {% endif %}
+
+  <!-- ================================================
+       Google Analytics
+  ================================================ -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.ga_id }}');
+  </script>
+
+  <!-- ================================================
+       Favicons
+  ================================================ -->
+  <link rel="shortcut icon" href="{{ site.url }}/images/favicons/favicon.ico">
+
+  <!-- ================================================
+       Fonts
+  ================================================ -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- ================================================
+       Styles
+  ================================================ -->
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/basic.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/layout.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/magnific-popup.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/animate.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/jarallax.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/swiper.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/fontawesome.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/brands.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/solid.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/custom.css">
+
+  {% if page.extra_css %}
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/{{ page.extra_css }}">
+  {% endif %}
+
+</head>
+
+<body class="{{ page.body_class | default: 'page' }}">
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.gtm_id }}"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="centrize full-width">
+      <div class="vertical-center">
+        <div class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Container -->
+  <div class="container">
+
+    <!-- Cursor -->
+    <div class="cursor-follower"></div>
+
+    <!-- ================================================
+         Header & Navigation
+    ================================================ -->
+    <header class="header">
+      <div class="head-top">
+
+        <!-- Menu button (mobile) -->
+        <a href="#" class="menu-btn"><span></span></a>
+
+        <!-- Search (Vue.js) -->
+        {% raw %}
+        <div id="app">
+          <img src="/images/Items/search.svg" width="100" alt="Search the blog" class="">
+          <main>
+            <input type="text" v-model="query" placeholder="Search...">
+            <div id="results">
+              <div v-for="item in filteredResults" :key="item.url" class="result-item">
+                <h2><a :href="item.url">{{ item.title }}</a></h2>
+                <p>{{ item.description }}</p>
+              </div>
+            </div>
+            <p v-if="!filteredResults.length && query">No results for "{{ query }}"</p>
+          </main>
+        </div>
+        {% endraw %}
+
+        <!-- Top menu -->
+        <div class="top-menu hover-masks">
+          <div class="top-menu-nav">
+            <div class="menu-topmenu-container">
+              <ul class="menu">
+                <li class="menu-item{% if page.url == '/' %} current-menu-item{% endif %}">
+                  <a href="{{ site.baseurl }}/">Home</a>
+                </li>
+                <li class="menu-item{% if page.url contains '/blog/' %} current-menu-item{% endif %}">
+                  <a href="{{ site.baseurl }}/blog/">Blog</a>
+                </li>
+                <li class="menu-item{% if page.url == '/about/' %} current-menu-item{% endif %}">
+                  <a href="{{ site.baseurl }}/about/">About</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Wrapper -->
+    <div class="wrapper">
+
+      <!-- ================================================
+           Page content (injected here by Jekyll)
+      ================================================ -->
+      {{ content }}
+
+      <!-- ================================================
+           Footer banner
+      ================================================ -->
+      <section id="Banner-du-bas" class="dark">
+        <div class="container-fluid">
+          <div class="row">
+            <center>
+              <p>© {{ 'now' | date: "%Y" }} — Wallid Guergour. Canada.</p>
+            </center>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- end .wrapper -->
+
+    <!-- ================================================
+         Footer
+    ================================================ -->
+    <footer class="footer">
+      <div class="soc-box">
+        <div class="follow-label">Follow Me</div>
+        <div class="soc" id="vue-social">
+          <li>
+            <a href="{{ site.instagram }}" title="Instagram" target="_blank" rel="noopener noreferrer">
+              <img src="{{ site.url }}/images/icons/instagram.svg" alt="Wallid Guergour on Instagram" width="30" height="30">
+            </a>
+          </li>
+          <li>
+            <a href="{{ site.linkedin }}" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <img src="{{ site.url }}/images/icons/linkedin.svg" alt="Wallid Guergour on LinkedIn" width="30" height="30">
+            </a>
+          </li>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </footer>
+
+    <!-- Lines (déco) -->
+    <div class="lines">
+      <div class="line-col"></div>
+      <div class="line-col"></div>
+      <div class="line-col"></div>
+      <div class="line-col"></div>
+      <div class="line-col"></div>
+    </div>
+
+  </div><!-- end .container -->
+
+  <!-- ================================================
+       Scripts — chargés en bas pour la performance
+  ================================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
+  <script src="{{ site.baseurl }}/js/app.js"></script>
+  <script src="{{ site.baseurl }}/js/jquery.min.js"></script>
+  <script src="{{ site.baseurl }}/js/jquery.validate.js"></script>
+  <script src="{{ site.baseurl }}/js/magnific-popup.js"></script>
+  <script src="{{ site.baseurl }}/js/simpleParallax.js"></script>
+  <script src="{{ site.baseurl }}/js/typed.js"></script>
+  <script src="{{ site.baseurl }}/js/jarallax.js"></script>
+  <script src="{{ site.baseurl }}/js/jarallax-video.js"></script>
+  <script src="{{ site.baseurl }}/js/jarallax-element.js"></script>
+  <script src="{{ site.baseurl }}/js/imagesloaded.pkgd.js"></script>
+  <script src="{{ site.baseurl }}/js/isotope.pkgd.js"></script>
+  <script src="{{ site.baseurl }}/js/swiper.js"></script>
+  <script src="{{ site.baseurl }}/js/grained.js"></script>
+  <script src="{{ site.baseurl }}/js/scripts.js"></script>
+
+  {% if page.use_mermaid %}
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad:true});</script>
+  {% endif %}
+
+  {% if page.extra_js %}
+  <script src="{{ site.baseurl }}/js/{{ page.extra_js }}"></script>
+  {% endif %}
+
+  <!-- ================================================
+       Header : disparait quand on quitte le hero
+  ================================================ -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const hero   = document.querySelector("#section-started");
+    const header = document.querySelector(".header");
+    if (!hero || !header) return;
+
+    header.classList.add("hero-only");
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const isHeroVisible = entries[0].isIntersecting;
+        header.classList.toggle("is-hidden", !isHeroVisible);
+      },
+      { root: null, threshold: 0.15 }
+    );
+    obs.observe(hero);
+  });
+  </script>
+
+  <!-- ================================================
+       Bouton back-to-top
+  ================================================ -->
+  <button id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 15L12 9L6 15"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <script>
+  const backToTopButton = document.getElementById("backToTop");
+  window.addEventListener("scroll", () => {
+    backToTopButton.classList.toggle("show", window.scrollY > 250);
+  });
+  backToTopButton.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  </script>
+
+</body>
+</html>

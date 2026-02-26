@@ -1,0 +1,43 @@
+# -----------------------------------------------
+# _config.yml — wallid-guergour.com
+# -----------------------------------------------
+
+# Site info
+title: "Wallid Guergour"
+tagline: "Industrial Welder & Fabricator | CWB × AWS Certified"
+description: "Technical blog on industrial welding, mining fabrication, and boilermaking. Written by a CWB and AWS certified welder working in aerospace, nuclear, and mining sectors in Canada."
+author: "Wallid Guergour"
+url: "https://www.wallid-guergour.com"
+baseurl: ""
+lang: "en-US"
+
+# Social
+linkedin: "https://www.linkedin.com/in/wallid-guergour"
+instagram: "https://www.instagram.com/wallid.guergour"
+
+# Analytics
+gtm_id: "GTM-NMFQC46"
+ga_id: "G-60665QRHES"
+
+# Jekyll
+permalink: pretty
+timezone: America/Toronto
+
+# Plugins (supported natively by GitHub Pages)
+plugins:
+  - jekyll-sitemap
+  - jekyll-redirect-from
+
+# Sitemap
+sitemap:
+  exclude:
+    - /404.html
+    - /annex/
+
+# Exclude from build
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - .vs/
+  - "*.sh"
