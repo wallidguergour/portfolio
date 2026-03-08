@@ -373,3 +373,150 @@
 .blog-card:hover .blog-card-arrow {
   transform: translateX(4px);
 }
+
+/* ================================================
+   Hero homepage — superposition typographique
+================================================ */
+.hero-bg-text {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22vw;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(242, 219, 194, 0.18);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  line-height: 1;
+}
+
+/* Le SVG et le contenu passent au-dessus */
+.section.started .centrize {
+  position: relative;
+  z-index: 2;
+}
+
+.section.started .mouse_btn {
+  position: relative;
+  z-index: 2;
+}
+
+/* ================================================
+   Portfolio — Isotope grid + filtres
+================================================ */
+.portfolio-filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.portfolio-filters button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.portfolio-filters button:hover,
+.portfolio-filters button.active {
+  border-color: #F2DBC2;
+  color: #F2DBC2;
+  background: rgba(242, 219, 194, 0.05);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1024px) {
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .portfolio-grid { grid-template-columns: 1fr; }
+}
+
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 4 / 3;
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+  filter: grayscale(30%);
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.06);
+  filter: grayscale(0%);
+}
+
+.portfolio-item-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 15, 20, 0.7);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.portfolio-item:hover .portfolio-item-overlay {
+  opacity: 1;
+}
+
+.portfolio-item-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #F2DBC2;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.portfolio-item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+}
+
+/* Tag catégorie en coin — visible sans hover */
+.portfolio-item-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #111;
+  background: #F2DBC2;
+  padding: 3px 8px;
+  text-transform: uppercase;
+}
+
+/* Isotope — masquage des éléments filtrés */
+.portfolio-item.is-hidden {
+  display: none;
+}

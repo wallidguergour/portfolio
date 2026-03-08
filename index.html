@@ -8,18 +8,13 @@ og_type: website
 body_class: home
 ---
 
-<!-- ================================================
-     Section Hero
-================================================ -->
+<!-- Hero -->
 <div class="section started" id="section-started">
-
-  <!-- Background — tôle tracée animée -->
   <div class="video-bg jarallax" style="background-image: url(images/bg/hero.webp);">
     <div class="video-bg-mask"></div>
     <div class="video-bg-texture" id="grained_container"></div>
   </div>
-
-  <!-- Hero content -->
+  <span class="hero-bg-text">WELDER</span>
   <div class="centrize full-width">
     <div class="vertical-center">
       <div class="started-content">
@@ -30,81 +25,143 @@ body_class: home
       <img src="images/Items/header.svg" alt="Wallid Guergour — Industrial Welder" class="logo">
     </div>
   </div>
-
   <a href="#section-about" class="mouse_btn"><span class="icon fas fa-chevron-down"></span></a>
-
 </div>
 
-
-<!-- ================================================
-     Section About
-================================================ -->
+<!-- About -->
 <div class="section about" id="section-about">
-
-  <div class="title">
-    <div class="title_inner">
-      <h2>Welding. <strong>Reality.</strong> Precision.</h2>
-    </div>
-  </div>
-
+  <div class="title"><div class="title_inner"><h2>Welding. <strong>Reality.</strong> Precision.</h2></div></div>
   <div class="content content-box">
     <div class="desc">
-
       <img src="images/Items/about.svg" alt="About Wallid Guergour">
-
       <h3 class="title_inner">Who I am</h3>
-
-      <p>
-        I'm Wallid — a certified industrial welder based in Canada, currently working as a journeyman fitter-welder
-        in one of the country's most technically demanding shops: aerospace components, nuclear assemblies,
-        hydroelectric structures, and heavy mining equipment fabrication.
-      </p>
-
-      <p>
-        I hold <strong>5 CWB certifications</strong> and <strong>2 AWS certifications</strong>,
-        a <em>Titre Professionnel Soudeur Industriel</em> (France), and I'm finalizing my
-        <em>BAC PRO Chaudronnerie</em> through a VAE process — completed remotely from Canada.
-      </p>
-
-      <p>
-        This blog exists because almost nobody in this trade documents their work publicly.
-        No personal branding, no technical writing, no knowledge sharing beyond the shop floor.
-        I'm changing that. Here you'll find real technical content written by someone who does this for a living —
-        not generic tutorials scraped from textbooks.
-      </p>
-
-      <a href="/about/" class="btn hover-animated">
-        <span class="circle"></span>
-        <span class="lnk">Full background & certifications →</span>
-      </a>
-
+      <p>I'm Wallid — a certified industrial welder based in Canada, currently working as a journeyman fitter-welder in one of the country's most technically demanding shops: aerospace components, nuclear assemblies, hydroelectric structures, and heavy mining equipment fabrication.</p>
+      <p>I hold <strong>5 CWB certifications</strong> and <strong>2 AWS certifications</strong>, a <em>Titre Professionnel Soudeur Industriel</em> (France), and I'm finalizing my <em>BAC PRO Chaudronnerie</em> through a VAE process — completed remotely from Canada.</p>
+      <p>This blog exists because almost nobody in this trade documents their work publicly. No personal branding, no technical writing, no knowledge sharing beyond the shop floor. I'm changing that.</p>
+      <a href="/about/" class="btn hover-animated"><span class="circle"></span><span class="lnk">Full background & certifications →</span></a>
     </div>
   </div>
 </div>
 
-
-<!-- ================================================
-     Section Blog (derniers articles)
-================================================ -->
-<div class="section about" id="section-blog">
-
-  <div class="title">
-    <div class="title_inner">
-      <h2>From the <strong>Blog</strong></h2>
-    </div>
-  </div>
-
+<!-- Portfolio -->
+<div class="section about" id="section-portfolio">
+  <div class="title"><div class="title_inner"><h2>Field <strong>Work</strong></h2></div></div>
   <div class="content content-box">
     <div class="desc">
-      <p>
-        Deep dives into welding processes, mining equipment fabrication, materials science,
-        and the reality of working as a certified welder across multiple sectors.
-        No fluff. No AI-generated filler. Field experience, documented.
-      </p>
-      <a href="/blog/" class="btn hover-animated">
-        <span class="circle"></span>
-        <span class="lnk">Read the blog →</span>
-      </a>
+
+      <div class="portfolio-filters">
+        <button class="active" data-filter="*">All</button>
+        <button data-filter="welding">Welding</button>
+        <button data-filter="fabrication">Fabrication</button>
+        <button data-filter="nuclear">Nuclear</button>
+      </div>
+
+      <div class="portfolio-grid" id="portfolio-grid">
+
+        <div class="portfolio-item" data-category="nuclear">
+          <span class="portfolio-item-tag">Nuclear</span>
+          <a href="/images/portfolio/nucleaire-cuve-assembly.webp" class="portfolio-lightbox" title="Pressure Vessel Assembly">
+            <img src="/images/portfolio/nucleaire-cuve-assembly.webp" alt="Nuclear pressure vessel assembly" loading="lazy">
+            <div class="portfolio-item-overlay">
+              <div class="portfolio-item-label">Nuclear</div>
+              <div class="portfolio-item-title">Pressure Vessel Assembly</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="portfolio-item" data-category="welding">
+          <span class="portfolio-item-tag">Welding</span>
+          <a href="/images/portfolio/nucleaire-gusset-weld.webp" class="portfolio-lightbox" title="Gusset Plate — Nuclear Component">
+            <img src="/images/portfolio/nucleaire-gusset-weld.webp" alt="Gusset plate weld on nuclear component" loading="lazy">
+            <div class="portfolio-item-overlay">
+              <div class="portfolio-item-label">Welding</div>
+              <div class="portfolio-item-title">Gusset Plate — Nuclear Component</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="portfolio-item" data-category="fabrication">
+          <span class="portfolio-item-tag">Fabrication</span>
+          <a href="/images/portfolio/fn2-thermal-interference-fit.webp" class="portfolio-lightbox" title="Thermal Interference Fit — FN2">
+            <img src="/images/portfolio/fn2-thermal-interference-fit.webp" alt="Thermal interference fit FN2" loading="lazy">
+            <div class="portfolio-item-overlay">
+              <div class="portfolio-item-label">Fabrication</div>
+              <div class="portfolio-item-title">Thermal Interference Fit — FN2</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="portfolio-item" data-category="welding">
+          <span class="portfolio-item-tag">Welding</span>
+          <a href="/images/portfolio/wps-hydro-fillet-weld.webp" class="portfolio-lightbox" title="WPS Qualification — Hydroelectric">
+            <img src="/images/portfolio/wps-hydro-fillet-weld.webp" alt="WPS qualification hydroelectric fillet weld" loading="lazy">
+            <div class="portfolio-item-overlay">
+              <div class="portfolio-item-label">Welding</div>
+              <div class="portfolio-item-title">WPS Qualification — Hydroelectric</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="portfolio-item" data-category="welding">
+          <span class="portfolio-item-tag">Welding</span>
+          <a href="/images/portfolio/fcaw-stainless-fillet.webp" class="portfolio-lightbox" title="FCAW — Stainless Steel Fillet">
+            <img src="/images/portfolio/fcaw-stainless-fillet.webp" alt="FCAW stainless steel fillet weld" loading="lazy">
+            <div class="portfolio-item-overlay">
+              <div class="portfolio-item-label">Welding</div>
+              <div class="portfolio-item-title">FCAW — Stainless Steel Fillet</div>
+            </div>
+          </a>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
+
+<!-- Blog -->
+<div class="section about" id="section-blog">
+  <div class="title"><div class="title_inner"><h2>From the <strong>Blog</strong></h2></div></div>
+  <div class="content content-box">
+    <div class="desc">
+      <p>Deep dives into welding processes, mining equipment fabrication, materials science, and the reality of working as a certified welder across multiple sectors. No fluff. No AI-generated filler. Field experience, documented.</p>
+      <a href="/blog/" class="btn hover-animated"><span class="circle"></span><span class="lnk">Read the blog →</span></a>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // Filtres portfolio
+  const buttons = document.querySelectorAll(".portfolio-filters button");
+  const items   = document.querySelectorAll(".portfolio-item");
+
+  buttons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      buttons.forEach(function (b) { b.classList.remove("active"); });
+      btn.classList.add("active");
+      const filter = btn.getAttribute("data-filter");
+      items.forEach(function (item) {
+        if (filter === "*" || item.dataset.category === filter) {
+          item.style.display = "";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
+  });
+
+  // Magnific Popup — lightbox galerie
+  if (typeof $.fn.magnificPopup !== "undefined") {
+    $(".portfolio-grid").magnificPopup({
+      delegate: ".portfolio-lightbox",
+      type: "image",
+      gallery: { enabled: true },
+      image: { titleSrc: "title" },
+      mainClass: "mfp-fade",
+      removalDelay: 300
+    });
+  }
+
+});
+</script>

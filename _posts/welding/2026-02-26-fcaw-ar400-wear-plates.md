@@ -5,7 +5,7 @@ description: "How I approach flux-cored arc welding on AR400 abrasion-resistant 
 date: 2026-02-26
 category: welding
 permalink: /blog/welding/fcaw-ar400-wear-plates/
-image: /images/og/wallid-guergour.webp
+image: /images/blog/fcaw-ar400-wear-plates.webp
 image_alt: "FCAW welding on AR400 abrasion-resistant steel"
 read_time: 8
 tags:
