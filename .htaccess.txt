@@ -9,4 +9,16 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 ErrorDocument 404 https://www.wallid-guergour.com/annex/404-not-found.html
 
 
+# Legacy pages — redirect/remove parasitic content
+# 301 — Welding in Art (767 GSC impressions; redirect preserves link equity)
+Redirect 301 /blog/welding/007-Welding-in-Art.html /blog/
 
+# 410 Gone — no SEO value, no redirect target
+Redirect 410 /blog/welding/start-welding-business-2023.html
+Redirect 410 /blog/programming/python/Learn-Python-conditions-for-industial-field.html
+
+# 410 Gone — non-ferrous metals page (URL contains spaces; regex covers raw and encoded forms)
+RedirectMatch 410 "^/blog/metallurgy/08-Non-ferrous[%20 ]+metals.*alloys\.html$"
+
+# 410 Gone — entire /blog/metallurgy/Book/ subtree
+RedirectMatch 410 "^/blog/metallurgy/Book/"

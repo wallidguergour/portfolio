@@ -1,7 +1,7 @@
 ---
 layout: article
 title: "Why Australia's Mining Boom Is Creating a Critical Shortage of Certified Welders"
-description: "Australia faces a 70,000-welder shortfall by 2030. Mining vacancies are surpassing 2011 boom peaks. Here is what the data says, and what it means for certified tradespeople looking to work in Australian mining."
+description: "Australia faces a 70,000-welder shortfall by 2030. Mining vacancies exceed the 2011 boom. What it means for certified tradespeople targeting Australian mining."
 date: 2026-03-07
 category: industry
 permalink: /blog/industry/australia-mining-welder-shortage-2025/
