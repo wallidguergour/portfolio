@@ -9,6 +9,8 @@ permalink: /blog/
 breadcrumb_name: "Blog"
 schema_type: BreadcrumbList
 body_class: page
+redirect_from:
+  - /blog/welding/007-Welding-in-Art.html
 ---
 
 <div class="section started section-title" id="section-started">
